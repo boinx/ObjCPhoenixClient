@@ -51,7 +51,7 @@
 }
 
 - (void)send {
-    const NSString *ref = [self.channel.socket makeRef];
+    NSString *ref = [self.channel.socket makeRef];
     self.refEvent = [self.channel replyEventName:ref];
     self.receivedResp = nil;
     self.sent = NO;
