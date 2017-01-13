@@ -192,8 +192,9 @@ static NSTimeInterval reconnectInterval = 5;
     if (self.heartbeatInterval > 0) {
         [self startHeartbeatTimerWithInterval:self.heartbeatInterval];
     }
-    
-    for (OnOpen callback in self.openCallbacks) {
+	
+	NSArray *callbacks = [self.openCallbacks copy];
+    for (OnOpen callback in callbacks) {
         callback();
     }
     
