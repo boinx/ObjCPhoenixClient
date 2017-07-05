@@ -51,7 +51,13 @@
 }
 
 - (void)send {
-    NSString *ref = [self.channel.socket makeRef];
+	
+	PhxSocket *socket = self.channel.socket;
+	if (!socket) {
+		return;
+	}
+	
+    NSString *ref = [socket makeRef];
     self.refEvent = [self.channel replyEventName:ref];
     self.receivedResp = nil;
     self.sent = NO;
@@ -65,7 +71,7 @@
     }];
     [self startAfter];
     self.sent = YES;
-    [self.channel.socket push:@{@"topic":self.channel.topic, @"event": self.event, @"payload":self.payload, @"ref": ref}];
+    [socket push:@{@"topic":self.channel.topic, @"event": self.event, @"payload":self.payload, @"ref": ref}];
 }
 
 - (PhxPush*)onReceive:(NSString *)status callback:(OnMessage)callback {
