@@ -156,7 +156,13 @@ static NSTimeInterval reconnectInterval = 5;
     if (!error) {
         NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
         [self.queue addOperationWithBlock:^{
-            [self.socket send:jsonString];
+            if (!jsonString) {
+                [self.socket sendData:nil error:nil]; // Send Data, but it doesn't matter since we are going to send the same text frame with 0 length.
+            } else if ([jsonString isKindOfClass:[NSString class]]) {
+                [self.socket sendString:jsonString error:nil];
+            } else {
+                NSAssert(NO, @"Unrecognized message. Not able to send anything other than a String or NSData.");
+            }
         }];
     }
 }
