@@ -84,6 +84,16 @@
     }
 }
 
+/*
+ .payload example:
+ {
+     "app_identifier" = "com.boinx.mimoLive-Reporter";
+     "app_version" = 1376;
+     role = client;
+     "user_id" = "3C0221AE-91DB-4F86-B70C-3033553911BB";
+ }
+ */
+
 - (void)sendJoin {
     self.state = ChannelJoining;
     self.joinPush.payload = self.params;
