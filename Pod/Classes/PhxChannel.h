@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+// Double-quoted include warning can not be fixed with Double-quoted because it produces a:
+// ERROR: Include of non-modular header inside framework module
 #import "PhxTypes.h"
 
 
